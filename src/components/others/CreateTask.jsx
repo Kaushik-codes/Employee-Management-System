@@ -28,8 +28,7 @@ const INITIAL_STATE = {
 
 const CreateTask = () => {
   const [form, setForm] = useState(INITIAL_STATE);
-  const [userData,setUserData] = useContext(AuthContext);
-  
+  const [userData, setUserData] = useContext(AuthContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -117,7 +116,7 @@ const CreateTask = () => {
               </Field>
 
               <Field label="Assign To">
-                <input
+                <select
                   name="assignTo"
                   type="text"
                   placeholder="Employee name"
@@ -125,7 +124,22 @@ const CreateTask = () => {
                   onChange={handleChange}
                   className={inputClass}
                   required
-                />
+                >
+                  <option value="" style={{ backgroundColor: '#0d1117', color: '#475569' }}>
+                    Select employee
+                    </option>
+
+                  {
+                    userData.map((emp,idx)=>(
+                      <option 
+                      key={idx} 
+                      value={emp.firstname}
+                      style={{backgroundColor: '#0d1117', color: '#f1f5f9'}}>
+                        {emp.firstname}
+                      </option>
+                    ))
+                  }
+                </select>
               </Field>
             </div>
 

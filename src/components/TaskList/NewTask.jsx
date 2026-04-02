@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { toast } from "sonner"
 import { AuthContext } from "../../context/AuthProvider";
 
 const NewTask = ({task,employee}) => {
@@ -40,6 +41,7 @@ const NewTask = ({task,employee}) => {
       return emp;
     });
     setUserData(updatedData);
+    toast("Task is accepted.");
   }
 
   return (

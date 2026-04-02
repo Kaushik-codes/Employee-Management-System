@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthProvider";
+import { toast } from "sonner"
 
 const FailedTask = ({task,employee}) => {
   const formatDate = (dateStr) => {
@@ -44,6 +45,7 @@ const FailedTask = ({task,employee}) => {
       return emp;
     });
     setUserData(updatedData);
+    toast("Task is attempting again.");
   };
 
   return (

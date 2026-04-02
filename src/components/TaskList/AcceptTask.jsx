@@ -1,21 +1,36 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthProvider";
+import { toast } from "sonner"
 
-const AcceptTask = ({task,employee}) => {
+const AcceptTask = ({ task, employee }) => {
   const formatDate = (dateStr) => {
     const [year, month, day] = dateStr.split("-").map(Number);
     const months = [
-      "January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December",
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
     ];
     const suffix =
-      day % 10 === 1 && day !== 11 ? "st"
-        : day % 10 === 2 && day !== 12 ? "nd"
-          : day % 10 === 3 && day !== 13 ? "rd" : "th";
+      day % 10 === 1 && day !== 11
+        ? "st"
+        : day % 10 === 2 && day !== 12
+          ? "nd"
+          : day % 10 === 3 && day !== 13
+            ? "rd"
+            : "th";
     return `${day}${suffix} ${months[month - 1]} ${year}`;
   };
   const advDate = formatDate(task.date);
-  
+
   const [userData, setUserData] = useContext(AuthContext);
 
   const handleComplete = () => {
@@ -39,6 +54,7 @@ const AcceptTask = ({task,employee}) => {
       return emp;
     });
     setUserData(updatedData);
+    toast("Task marked as completed.");
   };
 
   const handleFailed = () => {
@@ -62,12 +78,12 @@ const AcceptTask = ({task,employee}) => {
       return emp;
     });
     setUserData(updatedData);
+    toast("Task marked as failed.");
   };
 
   return (
     <div>
       <div className="shrink-0 w-72 bg-amber-400/10 border border-amber-400/20 hover:border-amber-400/40 transition-all duration-200 h-full rounded-2xl px-5 py-6 flex flex-col justify-between">
-        
         <div>
           <div className="flex flex-row justify-between items-center">
             <h3 className="bg-amber-400/20 text-amber-300 border border-amber-400/30 px-3 py-1 rounded-lg text-xs font-semibold tracking-widest uppercase">
@@ -75,8 +91,12 @@ const AcceptTask = ({task,employee}) => {
             </h3>
             <h4 className="text-xs font-medium text-slate-500">{advDate}</h4>
           </div>
-          <h2 className="mt-4 text-lg font-bold text-slate-100">{task.title}</h2>
-          <p className="text-sm mt-2 text-slate-400 leading-relaxed">{task.description}</p>
+          <h2 className="mt-4 text-lg font-bold text-slate-100">
+            {task.title}
+          </h2>
+          <p className="text-sm mt-2 text-slate-400 leading-relaxed">
+            {task.description}
+          </p>
         </div>
 
         <div className="mt-6 flex gap-2">
@@ -93,7 +113,6 @@ const AcceptTask = ({task,employee}) => {
             ✕ Failed
           </button>
         </div>
-
       </div>
     </div>
   );
