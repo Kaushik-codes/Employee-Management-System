@@ -13,7 +13,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (userData !== null) {
-      setLocalStorage("employees", JSON.stringify(userData));
+      localStorage.setItem("employees", JSON.stringify(userData));
     }
   }, [userData]);
   return (
