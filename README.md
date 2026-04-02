@@ -1,21 +1,114 @@
-<<<<<<< HEAD
-# React + Vite
+# 🚀 Employee Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
-Currently, two official plugins are available:
+A modern and responsive **Employee Management System** built using **React and Tailwind CSS**, designed to manage employee records efficiently with a clean UI and smooth user experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔗 **Live Demo:** [https://employee-management-system-swart-nu.vercel.app/](https://employee-management-system-swart-nu.vercel.app/)
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🔑 Demo Credentials
 
-## Expanding the ESLint configuration
+> **Note:** All data is stored in localStorage. Use the credentials below to access different roles.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-=======
-# Employee-Management-System
-An Employee Management System where we can login as Admin or Employee and assign or manage tasks. Created using HTML, JavaScript, React and Tailwind CSS.
->>>>>>> 2be5817caec09128c5962fa2f1be03622cf2a294
+### 👑 Admin Access
+| Role | Email | Password |
+|------|-------|----------|
+| Admin | `admin@example.com` | `123` |
+
+### 👥 Employee Access
+| Role | Email | Password |
+|------|-------|----------|
+| Employee 1 | `employee1@example.com` | `123` |
+| Employee 2 | `employee2@example.com` | `123` |
+| Employee 3 | `employee3@example.com` | `123` |
+| Employee 4 | `employee4@example.com` | `123` |
+| Employee 5 | `employee5@example.com` | `123` |
+
+---
+
+## 📌 Project Overview
+
+This project is a frontend-based Employee Management System where users can manage employee data such as adding, viewing, updating, and deleting records.
+
+It is built with a focus on:
+- ✅ Clean UI design
+- ✅ Component-based architecture
+- ✅ Real-world CRUD operations
+- ✅ Role-based authentication
+- ✅ Responsive design for all devices
+
+---
+
+## ⚙️ Tech Stack
+
+| Category | Technology |
+|----------|------------|
+| Frontend | React.js |
+| Styling | Tailwind CSS |
+| Language | JavaScript (ES6+) |
+| Icons | React Icons |
+| HTTP Client | Axios / Fetch API |
+| Deployment | Vercel |
+
+---
+
+## ✨ Features
+
+### Current Features
+- 🔐 **Authentication System** - Admin & Employee login
+- ➕ **Add Employees** - Create new employee records
+- 📋 **View Employees** - Browse all employees in a table/grid
+- ✏️ **Update Details** - Edit employee information
+- ❌ **Delete Records** - Remove employees from the system
+- 🔍 **Search & Filter** - Find employees quickly
+- 📱 **Responsive Design** - Works on desktop, tablet, and mobile
+- ⚡ **Fast Performance** - Optimized React components
+
+### Role-Based Access
+- **Admin:** Full CRUD access, manage all employees
+- **Employee:** View-only access to their own information
+
+---
+
+## 🧠 What I Learned
+
+While building this project, I gained practical experience in:
+
+### React Concepts
+- Component structure and reusability
+- State management using `useState` and `useContext`
+- Side effects with `useEffect`
+- Custom hooks creation
+- Form handling and validation
+- React Router for navigation
+
+### Tailwind CSS
+- Utility-first CSS methodology
+- Responsive design patterns
+- Custom component styling
+- Dark mode implementation (if applicable)
+
+### Development Practices
+- Handling user input and forms
+- Implementing CRUD operations in frontend
+- Writing cleaner and maintainable code
+- Git version control
+- Deploying to Vercel
+
+---
+
+## 📂 Project Structure
+
+    src/
+    │
+    ├── components/          # Reusable UI components
+    │
+    ├── assets/              # Images / icons
+    │
+    ├── App.js               # Main app logic
+    │
+    └── index.js             # Entry point
