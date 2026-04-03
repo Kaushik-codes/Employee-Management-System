@@ -1,11 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GoogleGenAI } from "@google/genai";
+import { toast } from "sonner";
+
 const AIbutton = ({title,onSendData}) => {
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
-  const apiKey = "AIzaSyCgaunOy1cRW60cqRLtIo9n2s1YdKU3bCs";
 
-  const ai = new GoogleGenAI({ apiKey: apiKey });
+  const API_KEY = import.meta.env.VITE_API_KEY;
+
+  useEffect(()=>{
+    if(!API_KEY){
+      toast.error("API key not found!");
+      return;
+    }
+  },[API_KEY]);
+
+  const ai = new GoogleGenAI({ apiKey: API_KEY });
 
   const handleClick = async () => {
     setLoading(true);
