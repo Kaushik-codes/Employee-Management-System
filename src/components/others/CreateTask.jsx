@@ -1,10 +1,11 @@
 import React, { useContext, useState } from "react";
 import { Toaster, toast } from "sonner";
 import { AuthContext } from "../../context/AuthProvider";
+import AIbutton from "./AIbutton";
 
 const Field = ({ label, children }) => (
-  <div className="flex flex-col gap-1.5 animate-fadeIn">
-    <label className="text-sm font-semibold text-sky-300 tracking-wide uppercase">
+  <div className="flex flex-col gap-1.5">
+    <label className="text-xs font-semibold text-slate-400 tracking-widest uppercase">
       {label}
     </label>
     {children}
@@ -12,11 +13,11 @@ const Field = ({ label, children }) => (
 );
 
 const inputClass = `
-  w-full bg-white/5 border border-white/10 text-white text-sm
-  px-4 py-2.5 rounded-xl placeholder:text-gray-500
-  focus:outline-none focus:ring-2 focus:ring-sky-500/60 focus:border-sky-500/40
-  hover:border-white/20 transition-all duration-200
-   `;
+  w-full bg-white/[0.03] border border-white/5 text-slate-100 text-sm
+  px-4 py-3 rounded-xl placeholder:text-slate-600
+  focus:outline-none focus:ring-1 focus:ring-sky-500/40 focus:border-sky-500/30 focus:bg-white/[0.06]
+  hover:border-white/10 hover:bg-white/[0.05] transition-all duration-200
+`;
 
 const INITIAL_STATE = {
   title: "",
@@ -58,11 +59,27 @@ const CreateTask = () => {
     });
 
     if (found === true) {
-      setUserData(data); //update userData state
+      setUserData(data);
       toast.success("Task created successfully");
-      setForm(INITIAL_STATE); //reset form
+      setForm(INITIAL_STATE);
+      console.log(finalForm);
     } else {
       toast.error(`No employee found named ${form.assignTo}`);
+    }
+  };
+
+  const handleData = (data) => {
+    try {
+      const cleanJSON = data.replace(/```json|```/g, "").trim();
+      const parsedData = JSON.parse(cleanJSON);
+      setForm((prev) => ({
+        ...prev,
+        description: parsedData.description || prev.description || "",
+        category: parsedData.category || prev.category || "",
+      }));
+      toast.success("AI updated the description and category");
+    } catch (err) {
+      console.log("Passed error: ", err);
     }
   };
 
@@ -70,27 +87,33 @@ const CreateTask = () => {
     <div>
       <Toaster richColors position="top-center" />
       <div className="mt-10 max-w-xl mx-auto">
-        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl shadow-black/40">
-          <h2 className="text-2xl font-bold text-white mb-1">
-            Create New Task
-          </h2>
-          <p className="text-gray-500 text-sm mb-8">
-            Fill in the details to assign a task
-          </p>
+        <div className="bg-white/2 backdrop-blur-xl border border-white/5 rounded-3xl p-8 shadow-2xl shadow-black/60">
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+          {/* Header */}
+          <div className="mb-8 pb-6 border-b border-white/5">
+            <h2 className="text-xl font-bold text-slate-100">
+              Create New Task
+            </h2>
+            <p className="text-slate-600 text-sm mt-1">
+              Fill in the details to assign a task to an employee
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+
             <Field label="Task Title">
-              <input
-                name="title"
-                type="text"
-                placeholder="e.g. Design landing page"
-                value={form.title}
-                onChange={handleChange}
-                className={inputClass}
-                required
-              />
-              {/* React sees everything between the opening and closing tag as children. It packages it up 
-              and passes it as a prop automatically — you don't do anything special. */}
+              <div className="flex gap-2">
+                <input
+                  name="title"
+                  type="text"
+                  placeholder="e.g. Design landing page"
+                  value={form.title}
+                  onChange={handleChange}
+                  className={inputClass}
+                  required
+                />
+                <AIbutton title={form.title} onSendData={handleData} />
+              </div>
             </Field>
 
             <Field label="Description">
@@ -118,27 +141,26 @@ const CreateTask = () => {
               <Field label="Assign To">
                 <select
                   name="assignTo"
-                  type="text"
-                  placeholder="Employee name"
                   value={form.assignTo}
                   onChange={handleChange}
                   className={inputClass}
                   required
                 >
-                  <option value="" style={{ backgroundColor: '#0d1117', color: '#475569' }}>
+                  <option
+                    value=""
+                    style={{ backgroundColor: "#0d1117", color: "#475569" }}
+                  >
                     Select employee
-                    </option>
-
-                  {
-                    userData.map((emp,idx)=>(
-                      <option 
-                      key={idx} 
+                  </option>
+                  {userData.map((emp, idx) => (
+                    <option
+                      key={idx}
                       value={emp.firstname}
-                      style={{backgroundColor: '#0d1117', color: '#f1f5f9'}}>
-                        {emp.firstname}
-                      </option>
-                    ))
-                  }
+                      style={{ backgroundColor: "#0d1117", color: "#f1f5f9" }}
+                    >
+                      {emp.firstname}
+                    </option>
+                  ))}
                 </select>
               </Field>
             </div>
@@ -154,16 +176,19 @@ const CreateTask = () => {
               />
             </Field>
 
-            <button
-              type="submit"
-              className="mt-2 w-full py-3 rounded-xl font-semibold text-sm tracking-wide
-                         bg-sky-600 hover:bg-sky-500 active:scale-[0.98]
-                         text-white shadow-lg shadow-sky-900/40
-                         hover:shadow-sky-700/40
-                         transition-all duration-200 cursor-pointer"
-            >
-              Create Task
-            </button>
+            <div className="pt-2 border-t border-white/5 mt-2">
+              <button
+                type="submit"
+                className="w-full py-3 rounded-xl font-semibold text-sm tracking-wide
+                           bg-sky-500/10 hover:bg-sky-500/20
+                           border border-sky-500/20 hover:border-sky-500/40
+                           text-sky-400 hover:text-sky-300
+                           active:scale-[0.98] transition-all duration-200 cursor-pointer"
+              >
+                Create Task →
+              </button>
+            </div>
+
           </form>
         </div>
       </div>
