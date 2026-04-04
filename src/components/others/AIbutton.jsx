@@ -2,22 +2,28 @@ import React, { useEffect, useState } from "react";
 import { GoogleGenAI } from "@google/genai";
 import { toast } from "sonner";
 
-const AIbutton = ({title,onSendData}) => {
+const AIbutton = ({ title, onSendData }) => {
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
 
   const API_KEY = import.meta.env.VITE_API_KEY;
 
-  useEffect(()=>{
-    if(!API_KEY){
+  useEffect(() => {
+    if (!API_KEY) {
       toast.error("API key not found!");
       return;
     }
-  },[API_KEY]);
+  }, [API_KEY]);
 
   const ai = new GoogleGenAI({ apiKey: API_KEY });
 
   const handleClick = async () => {
+    // check if the title is empty
+    if (!title) {
+      toast.warning("Please input title first.");
+      return;
+    }
+
     setLoading(true);
     setResponse("");
 
@@ -29,23 +35,23 @@ const AIbutton = ({title,onSendData}) => {
            {
              "description": "text here",
              "category": "text here"
-           }`
+           }`,
       });
       setResponse(result.text);
       onSendData(result.text);
     } catch (error) {
       console.log("Gemini API Error:", error);
       setResponse(
-        "Error: Could not get response from AI. Check console for details."
+        "Error: Could not get response from AI. Check console for details.",
       );
     } finally {
       setLoading(false);
     }
   };
-    return (
+  return (
     <div>
       <button
-      title="Generate Description & Category"
+        title="Generate Description & Category"
         onClick={handleClick}
         disabled={loading}
         className="
