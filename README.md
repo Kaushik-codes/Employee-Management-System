@@ -6,7 +6,7 @@
 
 A modern and responsive **Employee Management System** built using **React and Tailwind CSS**, designed to manage employee records efficiently with a clean UI and smooth user experience.
 
-🔗 **Live Demo:** [https://employee-management-system-21puhonej-kaushik-nags-projects.vercel.app/](https://employee-management-system-133ld9xtz-kaushik-nags-projects.vercel.app/)
+🔗 **Live Demo:** employee-management-system-swart-nu.vercel.app
 
 ---
 
